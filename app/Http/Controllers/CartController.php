@@ -46,9 +46,12 @@ class CartController extends Controller
 
     public function add(string $id, Request $request): RedirectResponse
     {
+
+
+
         $cartProductData = $request->session()->get('cart_product_data');
         $cartProductData[$id] = $id;
-        $request->session()->put('cart_product_data', $cartProductData);
+        $request->session()->put('cart_product_data', $cartProductData) ;
 
         return back();
     }
