@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Product;
-
 
 class CartController extends Controller
 {
@@ -15,7 +14,6 @@ class CartController extends Controller
         // $products = []; //this simulates the database
         // $products[121] = ['name' => 'Tv samsung', 'price' => '1000'];
         // $products[11] = ['name' => 'Iphone', 'price' => '2000'];
-
 
         $cartProductData = $request->session()->get('cart_product_data'); //we get the products stored in session
 
@@ -26,14 +24,14 @@ class CartController extends Controller
         //         }
         //     }
         // }
-        
+
         $cartProducts = [];
         $products = [];
-        
+
         if ($cartProductData != null) {
             $cartProducts = Product::whereIn('id', $cartProductData)->get(); // we obtain the information of the products stored in the session
             $products = Product::whereNotIn('id', $cartProductData)->get(); // we obtain the information of products not stored in the session
-        }else{
+        } else {
             $products = Product::get(); // we obtain the information of products not stored in the session
         }
 
